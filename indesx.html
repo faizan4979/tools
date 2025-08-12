@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Free Online PNG, JPG, JPEG, and WEBP Image Converter. Convert and compress images instantly in your browser without uploading to a server.">
+    <title>Free Online Image Converter - PNG, JPG, WEBP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background: #0077b6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input,
+        select,
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        a.download-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .ads {
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #f1f1f1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            background: #0077b6;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Free Online Image Converter</h1>
+        <p>Convert PNG, JPG, JPEG, WEBP formats instantly – No Upload, 100% Free</p>
+    </header>
+
+    <main>
+        <div class="ads">
+            <!-- AdSense Placeholder -->
+            <p>Ad Space - Add Google AdSense Code Here</p>
+        </div>
+
+        <div class="controls">
+            <input type="file" id="upload" multiple accept="image/png,image/jpeg,image/webp">
+            <br>
+            <label for="format">Convert to: </label>
+            <select id="format">
+                <option value="image/webp">WEBP</option>
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg">JPG</option>
+            </select>
+            <br>
+            <label for="quality">Quality: </label>
+            <input type="range" id="quality" min="10" max="100" value="90"> <span id="qualityValue">90</span>%
+            <br>
+            <button id="convertBtn">Convert Images</button>
+        </div>
+
+        <div class="results" id="results"></div>
+
+        <div class="ads">
+            <!-- AdSense Placeholder -->
+            <p>Ad Space - Add Google AdSense Code Here</p>
+        </div>
+
+        <section>
+            <h2>Why Use Our Free Image Converter?</h2>
+            <p>Our free online image converter lets you convert PNG, JPG, JPEG, and WEBP formats directly in your
+                browser. No need to upload your files to any server, ensuring maximum privacy and instant results.
+                Perfect for bloggers, web developers, and anyone looking to optimize images for the web.</p>
+            <h3>Features</h3>
+            <ul>
+                <li>Supports PNG, JPG, JPEG, and WEBP formats</li>
+                <li>Instant conversion without file upload</li>
+                <li>Adjustable image quality for compression</li>
+                <li>Bulk image processing</li>
+                <li>Mobile-friendly and AdSense-ready</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Free Image Converter Tool | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        document.getElementById('quality').addEventListener('input', function () {
+            document.getElementById('qualityValue').textContent = this.value;
+        });
+
+        document.getElementById('convertBtn').addEventListener('click', function () {
+            const files = document.getElementById('upload').files;
+            const format = document.getElementById('format').value;
+            const quality = parseInt(document.getElementById('quality').value) / 100;
+
+            if (!files.length) {
+                alert("Please select at least one image.");
+                return;
+            }
+
+            document.getElementById('results').innerHTML = '';
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        canvas.toBlob(function (blob) {
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = file.name.replace(/\.[^/.]+$/, "") + "." + format.split('/')[1];
+                            link.className = 'download-btn';
+                            link.textContent = "Download " + file.name;
+
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'result-item';
+                            resultItem.innerHTML = `<strong>${file.name}</strong>`;
+                            resultItem.appendChild(link);
+                            document.getElementById('results').appendChild(resultItem);
+                        }, format, quality);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
