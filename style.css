@@ -1,0 +1,129 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f8;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #0077b6, #0096c7);
+    padding: 25px;
+    text-align: center;
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+}
+
+/* Main Container */
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Controls */
+.controls {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.controls input[type="file"],
+.controls select,
+.controls input[type="range"],
+.controls button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.controls button {
+    background: #0077b6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.controls button:hover {
+    background: #023e8a;
+}
+
+/* Results */
+.results {
+    margin-top: 20px;
+}
+
+.result-item {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: #f9fafb;
+}
+
+a.download-btn {
+    display: inline-block;
+    margin-top: 8px;
+    background: #28a745;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+a.download-btn:hover {
+    background: #218838;
+}
+
+/* Ads */
+.ads {
+    margin: 20px 0;
+    text-align: center;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    background: #f8f9fa;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Info Section */
+.info h2, .info h3 {
+    color: #0077b6;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    background: #0077b6;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    main {
+        padding: 15px;
+    }
+    .controls input, .controls select, .controls button {
+        width: 100%;
+    }
+}
